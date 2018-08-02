@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
+	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src = 'template.js'></script>
+
+</head>
+
+<body>
+	<h1>CMA Application</h1>
+	<div class = 'data-return'>
+		<div class = 'data-items'>
+		    <form action="https://hello.localtunnel.me/myaction" method="post">
+		        <div>
+		            <label for="address">Address:</label>
+		            <input type="text" id="address" name="address" placeholder="Enter address" />
+
+		            <input class = 'btn-style' type="submit" value="Enter" />
+		            <br><br>
+		        </div>
+	   		</form>
+	   		
+	   		
+	   		<button class = 'btn-style' id = 'reload'>Load new Results</button>
+	   		
+	   		<div class = 'display'>
+	   			
+	   		</div>
+   		</div>
+	</div>
+	<script id="entry-template" type="text/x-handlebars-template">
+	  <div class="entry">
+	    <h1>{{title}}</h1>
+	  </div>
+	</script>
+	<script type="text/javascript">
+		//Using jQuery along with GET request to receive and then display all 
+		//POST data that users have entered
+			document.getElementById('reload').onclick = function retrieveData() {
+			$.get("https://hello.localtunnel.me/data", function(data) {
+				myObj = JSON.parse(data);
+				console.log(myObj);
+
+				
+				var txt = "";
+				for(i in myObj) {
+					txt += "square footage: " + myObj[i]  + "<br>";
+				}
+
+				$("div.display").html(txt);
+
+			});
+		}
+
+		
+		</script>
+
+</body>
+
